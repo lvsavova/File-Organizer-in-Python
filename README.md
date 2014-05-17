@@ -10,7 +10,7 @@ General description:
 
 Functional requirements:
 
-* Should contain a config.properties file. Might have a GUI epresentation.
+* Should contain a config.properties file. Might have a GUI representation.
 * Should be able to organize files in a directory, based on their extensions.
 * Should be able to organize files in a directory, based on a word (sentence) that they contain.
 * Should be able to organize files in a directory according to their types (documents, executables ... )

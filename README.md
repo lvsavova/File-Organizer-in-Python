@@ -18,3 +18,9 @@ Functional requirements:
 ..... to be continued...
 
 Note: By organize I mean create new subdirectories of the given directory with appropriate names.
+
+What will the config file contain?
+
+* Directory to be re-organized.
+* The type of the re-organization.
+* Re-organization type specific properties.

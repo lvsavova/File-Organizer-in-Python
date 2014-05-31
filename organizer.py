@@ -1,8 +1,16 @@
 ﻿import os
+import os.path
 import sys
 import re
 import mimetypes
 from collections import defaultdict
+
+FILE_TYPES = {'Presentations': ['pptx', 'ppt'],
+              'Documents': ['pdf', 'docx', 'doc'],
+              'Text Files': ['txt'],
+              'Executables': ['exe', 'bat', 'bin', 'app', 'osx', 'msi'],
+              'Torrents': ['torrent'],
+              'Music': ['mp3', 'wav']}
 
 
 class Organizer:
@@ -16,27 +24,26 @@ class Organizer:
     def organize_by_esxtension(self):
         files_by_extensions = defaultdict(list)
 
-        pattern_file_name = r'.+(?=\.)|^[^\.]+\Z'
-        pattern_extension = r'(?:\.).+'
-
         for file in self.file_list:
-            list_potential_extenions = re.findall(pattern_extension, file)
-            if len(list_potential_extenions) > 0:
-                extension = list_potential_extenions[len(list_potential_extenions)-1]
-            else:
-                extension = ""
-            file_name = re.match(pattern_file_name, file, flags=0).group()
-            if extension is not "":
-                files_by_extensions[extension].append(file_name)
-            else:
-                files_by_extensions["No extension"] = file_name
-
+                extension = os.path.splitext(file)[1].split('.')[-1]
+                files_by_extensions[extension].append(file)
         return files_by_extensions
 
-    def organize_by_type(self):
-        files_by_type = defaultdict(list)
+    def organize_by_mime_type(self):
+        files_by_mime_type = defaultdict(list)
 
         for file in self.file_list:
             mime_type = mimetypes.guess_type(file, strict=True)[0]
-            files_by_type[mime_type].append(file)
+            files_by_mime_type[mime_type].append(file)
+        return files_by_mime_type
+
+    def organize_by_type(self):
+        files_by_type = defaultdict(list)
+        files_by_extensions = self.organize_by_esxtension()
+        print(files_by_extensions)
+        for extension in files_by_extensions:
+            for file_type in FILE_TYPES:
+                if extension in FILE_TYPES[file_type]:
+                    files_by_type[file_type] += files_by_extensions[extension]
+
         return files_by_type

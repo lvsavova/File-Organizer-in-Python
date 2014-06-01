@@ -1,4 +1,4 @@
-Python-Project-61495
+File organizer in Python
 ====================
 
 Name: File organizer in Python

@@ -13,11 +13,12 @@ class FolderReorganizer:
     def create_new_dirs(self, organization, path):
         for type in organization:
             new_dir_path = path + "\\" + type
-            os.mkdir(new_dir_path)
+            if os.path.exists(new_dir_path) is False:
+                os.mkdir(new_dir_path)
 
     def move_files(self, file_list, folder_name):
         for file in file_list:
-            destination = self.folder_path + "\\" + folder_name
+            destination = self.folder_path + "\\" + folder_name + "\\" + file
             source = self.folder_path + "\\" + file
             shutil.move(source, destination)
 

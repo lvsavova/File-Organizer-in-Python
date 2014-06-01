@@ -29,18 +29,10 @@ class Organizer:
                 files_by_extensions[extension].append(file)
         return files_by_extensions
 
-    def organize_by_mime_type(self):
-        files_by_mime_type = defaultdict(list)
-
-        for file in self.file_list:
-            mime_type = mimetypes.guess_type(file, strict=True)[0]
-            files_by_mime_type[mime_type].append(file)
-        return files_by_mime_type
-
     def organize_by_type(self):
         files_by_type = defaultdict(list)
         files_by_extensions = self.organize_by_esxtension()
-        print(files_by_extensions)
+
         for extension in files_by_extensions:
             for file_type in FILE_TYPES:
                 if extension in FILE_TYPES[file_type]:

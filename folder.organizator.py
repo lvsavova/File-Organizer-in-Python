@@ -12,9 +12,7 @@ class FolderReorganizer:
 
     def create_new_dirs(self, organization, path):
         for type in organization:
-            print(type)
             new_dir_path = path + "\\" + type
-            print(new_dir_path)
             os.mkdir(new_dir_path)
 
     def move_files(self, file_list, folder_name):
@@ -29,7 +27,10 @@ class FolderReorganizer:
 
         if type_of_reorganization is "extension":
             organization = organizer.organize_by_esxtension()
-            print(organization)
+
+        if type_of_reorganization is "type":
+            organization = organizer.organize_by_type()
+
         self.create_new_dirs(organization, self.folder_path)
         for folder_name in organization:
             self.move_files(organization[folder_name], folder_name)

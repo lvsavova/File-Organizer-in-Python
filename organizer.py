@@ -5,6 +5,7 @@ import re
 import mimetypes
 from collections import defaultdict
 
+
 FILE_TYPES = {'Presentations': ['pptx', 'ppt'],
               'Documents': ['pdf', 'docx', 'doc'],
               'Text Files': ['txt'],

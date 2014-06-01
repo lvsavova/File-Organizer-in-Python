@@ -11,7 +11,8 @@ FILE_TYPES = {'Presentations': ['pptx', 'ppt'],
               'Text Files': ['txt'],
               'Executables': ['exe', 'bat', 'bin', 'app', 'osx', 'msi'],
               'Torrents': ['torrent'],
-              'Music': ['mp3', 'wav']}
+              'Music': ['mp3', 'wav'],
+              'Pictures': ['png', 'jpg', 'jpeg']}
 
 
 class Organizer:
@@ -28,6 +29,8 @@ class Organizer:
         for file in self.file_list:
                 extension = os.path.splitext(file)[1].split('.')[-1]
                 files_by_extensions[extension].append(file)
+                if extension == '':
+                    files_by_extensions["no extension"].append(file)
         return files_by_extensions
 
     def organize_by_type(self):

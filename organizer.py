@@ -45,12 +45,13 @@ class Organizer:
 
         return files_by_type
 
-    def organize_by_content(self, match_string):
+    def organize_by_content(self, match_strings):
         files_by_content = defaultdict(list)
         files_by_extensions = self.organize_by_esxtension()
         docx_files = files_by_extensions['docx']
         doc_handler = DocumentHandler()
         for file in docx_files:
-            if doc_handler.search_content(self.directory + "\\" + file, match_string) is True:
-                files_by_content[match_string].append(file)
+            for string in match_strings:
+                if doc_handler.search_content(self.directory + "\\" + file, string) is True:
+                    files_by_content[string].append(file)
         return files_by_content

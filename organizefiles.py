@@ -4,10 +4,13 @@ from folderorganizator import FolderReorganizer
 properties = configparser.ConfigParser()
 properties.read("config.ini")
 
-directory = properties['directory']['DirectoryPath']
-type_of_reorganization = properties['orgtype']['ReorganizationType']
-match_content = properties['content']['SearchedText']
+source_directory = properties['directory']['SourceDirectoryPath']
+target_directory = properties['directory']['TargetDirectoryPath']
 
-fileorg = FolderReorganizer(directory)
-fileorg.match_string = match_content
+type_of_reorganization = properties['orgtype']['ReorganizationType']
+match_contents = properties['content']['SearchedText'].split(";")
+
+
+fileorg = FolderReorganizer(source_directory, target_directory)
+fileorg.match_strings = match_contents
 fileorg.reorganize(type_of_reorganization)

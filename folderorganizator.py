@@ -6,6 +6,7 @@ import os
 
 class FolderReorganizer:
     folder_path = ""
+    match_string = ""
 
     def __init__(self, folder_path):
         self.folder_path = folder_path
@@ -31,6 +32,9 @@ class FolderReorganizer:
 
         if type_of_reorganization == 'type':
             organization = organizer.organize_by_type()
+
+        if type_of_reorganization == 'content':
+            organization = organizer.organize_by_content(self.match_string)
 
         self.create_new_dirs(organization, self.folder_path)
         for folder_name in organization:

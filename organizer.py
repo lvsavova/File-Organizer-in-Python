@@ -4,6 +4,7 @@ import sys
 import re
 import mimetypes
 from collections import defaultdict
+from documenthandler import DocumentHandler
 
 
 FILE_TYPES = {'Presentations': ['pptx', 'ppt'],
@@ -43,3 +44,13 @@ class Organizer:
                     files_by_type[file_type] += files_by_extensions[extension]
 
         return files_by_type
+
+    def organize_by_content(self, match_string):
+        files_by_content = defaultdict(list)
+        files_by_extensions = self.organize_by_esxtension()
+        docx_files = files_by_extensions['docx']
+        doc_handler = DocumentHandler()
+        for file in docx_files:
+            if doc_handler.search_content(self.directory + "\\" + file, match_string) is True:
+                files_by_content[match_string].append(file)
+        return files_by_content

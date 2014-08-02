@@ -24,9 +24,8 @@ class Organizer:
         self.directory = directory
         self.file_list = os.listdir(directory)
 
-    def organize_by_esxtension(self):
+    def organize_by_extension(self):
         files_by_extensions = defaultdict(list)
-
         for file in self.file_list:
                 extension = os.path.splitext(file)[1].split('.')[-1]
                 files_by_extensions[extension].append(file)
@@ -36,18 +35,16 @@ class Organizer:
 
     def organize_by_type(self):
         files_by_type = defaultdict(list)
-        files_by_extensions = self.organize_by_esxtension()
-
+        files_by_extensions = self.organize_by_extension()
         for extension in files_by_extensions:
             for file_type in FILE_TYPES:
                 if extension in FILE_TYPES[file_type]:
                     files_by_type[file_type] += files_by_extensions[extension]
-
         return files_by_type
 
     def organize_by_content(self, match_strings):
         files_by_content = defaultdict(list)
-        files_by_extensions = self.organize_by_esxtension()
+        files_by_extensions = self.organize_by_extension()
         docx_files = files_by_extensions['docx']
         doc_handler = DocumentHandler()
         for file in docx_files:

@@ -1,16 +1,20 @@
 import configparser
 from folderorganizator import FolderReorganizer
 
-properties = configparser.ConfigParser()
-properties.read("config.ini")
 
-source_directory = properties['directory']['SourceDirectoryPath']
-target_directory = properties['directory']['TargetDirectoryPath']
+def main():
+    properties = configparser.ConfigParser()
+    properties.read("config.ini")
 
-type_of_reorganization = properties['orgtype']['ReorganizationType']
-match_contents = properties['content']['SearchedText'].split(";")
+    source_directory = properties['Directory']['SourceDirectoryPath']
+    target_directory = properties['Directory']['TargetDirectoryPath']
 
+    type_of_reorganization = properties['Orgtype']['ReorganizationType']
+    match_contents = properties['Content']['SearchedText'].split(";")
 
-fileorg = FolderReorganizer(source_directory, target_directory)
-fileorg.match_strings = match_contents
-fileorg.reorganize(type_of_reorganization)
+    fileorg = FolderReorganizer(source_directory, target_directory)
+    fileorg.match_strings = match_contents
+    fileorg.reorganize(type_of_reorganization)
+
+if __name__ == "__main__":
+    main()

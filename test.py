@@ -16,7 +16,8 @@ class TestValidateOrganization(unittest.TestCase):
 
         files_by_extensions = organizer.organize_by_extension()
 
-        self.assertCountEqual(files_by_extensions['exe'], ['file2.exe.exe', 'file3.docx.exe'])
+        self.assertCountEqual(files_by_extensions['exe'], ['file2.exe.exe',
+                                                           'file3.docx.exe'])
         self.assertCountEqual(files_by_extensions['docx'], ['file1.docx'])
         self.assertCountEqual(files_by_extensions['power'], ['some.power'])
 
@@ -25,7 +26,8 @@ class TestValidateOrganization(unittest.TestCase):
                      'song.mp3', 'song.wav',
                      'some torrent.torrent',
                      'picture.png', 'picture.jpg',
-                     'exec.exe', 'exec.bin', 'exec.app', 'exec.osx', 'exec.msi',
+                     'exec.exe', 'exec.bin', 'exec.app',
+                     'exec.osx', 'exec.msi',
                      'presentation.pptx']
 
         organizer = Organizer('C:')
@@ -34,7 +36,8 @@ class TestValidateOrganization(unittest.TestCase):
         files_by_type = organizer.organize_by_type()
 
         self.assertCountEqual(files_by_type['Documents'],
-                                           ['file.doc', 'file.docx', 'file.pdf'])
+                                           ['file.doc', 'file.docx',
+                                            'file.pdf'])
         self.assertCountEqual(files_by_type['Music'],
                                            ['song.wav', 'song.mp3'])
         self.assertCountEqual(files_by_type['Torrents'],
@@ -42,7 +45,9 @@ class TestValidateOrganization(unittest.TestCase):
         self.assertCountEqual(files_by_type['Pictures'],
                                            ['picture.png', 'picture.jpg'])
         self.assertCountEqual(files_by_type['Executables'],
-                                           ['exec.exe', 'exec.bin', 'exec.app', 'exec.osx', 'exec.msi'])
+                                           ['exec.exe', 'exec.bin',
+                                            'exec.app', 'exec.osx',
+                                            'exec.msi'])
         self.assertCountEqual(files_by_type['Presentations'],
                                            ['presentation.pptx'])
 

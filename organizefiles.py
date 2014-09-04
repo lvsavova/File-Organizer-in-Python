@@ -3,10 +3,6 @@ from folderorganizator import FolderReorganizer
 
 
 def main():
-    """
-    A main method that reads the configurations and triggers the
-    reorganizing.
-    """
     properties = configparser.ConfigParser()
     properties.read("config.ini")
 
